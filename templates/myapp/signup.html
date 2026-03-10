@@ -1,0 +1,204 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:#f4f7fb;
+}
+
+.container{
+    max-width:900px;
+    margin:40px auto;
+    background:#fff;
+    padding:35px;
+    border-radius:10px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+h2{
+    text-align:center;
+    color:#003366;
+}
+
+label{
+    font-weight:500;
+    margin-top:18px;
+    display:block;
+    color:#003366;
+}
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.file-list{
+    margin-top:8px;
+}
+
+.file-item{
+    background:#eef3fb;
+    padding:8px 10px;
+    border-radius:5px;
+    margin-bottom:5px;
+    font-size:14px;
+}
+
+.note{
+    font-size:12px;
+    color:#777;
+}
+
+button{
+    margin-top:25px;
+    background:#003366;
+    color:#fff;
+    padding:12px;
+    width:100%;
+    border:none;
+    border-radius:6px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0055aa;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Student Registration</h2>
+
+<form id="regForm" method="POST" enctype="multipart/form-data" action="{% url 'signup' %}">
+{% csrf_token %}
+
+<label>Full Name *</label>
+<input type="text" name="full_name" required>
+
+<label>Email *</label>
+<input type="email" name="email" required>
+
+<label>Phone *</label>
+<input type="tel" name="phone" required>
+
+<label>Country *</label>
+<input type="text" name="country" required>
+
+<label>Undergraduate Degree Certificate *</label>
+<input type="file" multiple data-max="2" class="file-input" name="ug_certificate">
+<div class="file-list"></div>
+<div class="note">Maximum 2 files</div>
+
+<label>Academic Transcripts *</label>
+<input type="file" multiple data-max="6" class="file-input" name="transcripts">
+<div class="file-list"></div>
+<div class="note">Maximum 6 files</div>
+
+<label>Passport *</label>
+<input type="file" class="file-input" name="passport">
+<div class="file-list"></div>
+
+<label>CV *</label>
+<input type="file" class="file-input" name="cv">
+<div class="file-list"></div>
+
+<label>English Proficiency Proof *</label>
+<input type="file" class="file-input" name="english_proof">
+<div class="file-list"></div>
+
+<label>Reference Letters *</label>
+<input type="file" class="file-input" name="references">
+<div class="file-list"></div>
+
+<label>Statement of Purpose *</label>
+<textarea name="sop" rows="5" required></textarea>
+
+<label>Work Experience Certificates</label>
+<input type="file" class="file-input" name="work_experience">
+<div class="file-list"></div>
+
+<button type="submit">Submit Application</button>
+
+</form>
+</div>
+
+<script>
+
+document.querySelectorAll(".file-input").forEach(input=>{
+
+let filesArray=[];
+const list=input.nextElementSibling;
+const maxFiles=input.dataset.max;
+
+input.addEventListener("change",function(){
+
+const newFiles=Array.from(input.files);
+
+newFiles.forEach(file=>{
+
+if(!maxFiles || filesArray.length < maxFiles){
+filesArray.push(file);
+}
+
+});
+
+if(maxFiles && filesArray.length > maxFiles){
+alert("Maximum "+maxFiles+" files allowed");
+filesArray=filesArray.slice(0,maxFiles);
+}
+
+updateFiles();
+showFiles();
+
+});
+
+function updateFiles(){
+
+const dataTransfer=new DataTransfer();
+
+filesArray.forEach(file=>dataTransfer.items.add(file));
+
+input.files=dataTransfer.files;
+
+}
+
+function showFiles(){
+
+list.innerHTML="";
+
+filesArray.forEach(file=>{
+
+const div=document.createElement("div");
+div.classList.add("file-item");
+div.textContent=file.name;
+
+list.appendChild(div);
+
+});
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

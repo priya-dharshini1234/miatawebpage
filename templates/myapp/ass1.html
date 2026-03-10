@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assessment</title>
+
+<style>
+body{
+ font-family: Arial;
+ background:#eef2f7;
+ padding:30px;
+}
+
+.question{
+  margin-bottom:20px;
+  background:#fff;
+  padding:15px;
+  border-radius:8px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.option{
+ padding:12px;
+ margin:8px 0;
+ border-radius:8px;
+ background:#f1f3f6;
+}
+
+.correct{ border:2px solid #2ecc71; }
+.wrong{ border:2px solid #e74c3c; }
+
+.explanation{
+ display:none;
+ margin-top:10px;
+ padding:10px;
+ background:#f9fafc;
+ border-left:4px solid #0984e3;
+ border-radius:6px;
+}
+
+.hint-toggle{
+  color:#555;
+  font-size:14px;
+  cursor:pointer;
+  float:right;
+  margin-bottom:8px;
+}
+
+.hint-box{
+  display:none;
+  margin-top:10px;
+  padding:10px;
+  background:#f1f9ff;
+  border-left:4px solid #0984e3;
+  border-radius:5px;
+  font-size:14px;
+}
+
+button{
+ padding:12px 25px;
+ border:none;
+ border-radius:10px;
+ font-size:15px;
+ cursor:pointer;
+ margin:10px;
+}
+
+.submit-btn{ background:#0984e3; color:white; }
+.finish-btn{ background:#00b894; color:white; display:none; }
+</style>
+</head>
+
+<body>
+
+<!-- Instructions Box -->
+<div style="border: 2px solid #007BFF; border-radius: 10px; padding: 20px; background-color: #f9f9ff; margin-bottom: 20px;">
+    <h2 style="color: #007BFF; text-align: center;">Assessment Instructions</h2>
+    <ul style="font-size: 16px; line-height: 1.6;">
+      <li>Read all questions carefully before answering.</li>
+      <li>You must score <strong>at least 80%</strong> to unlock the next module.</li>
+      <li>Once you click the <strong>Submit</strong> button, your answers will be final — <strong>no changes</strong> can be made.</li>
+      <li>Make sure you have completed all questions before submitting.</li>
+      <li>Your score and result will be displayed immediately after submission.</li>
+    </ul>
+    <p style="text-align: center; color: #d63384; font-weight: bold;">
+      ⚠️ Once submitted, answers cannot be edited!
+    </p>
+  </div>
+
+
+<form id="quizForm" method="POST" action="{% url 'result' %}">
+{% csrf_token %}
+
+<input type="hidden" name="score" id="scoreInput">
+<input type="hidden" name="total" id="totalInput">
+
+<!-- Question 1 -->
+<div class="question" data-correct="b">
+
+<div class="hint-toggle" onclick="toggleHint('hint1', this)">
+Show hint ▼
+</div>
+
+<p><b>1. Which frequency is used for abdominal ultrasound?</b></p>
+
+<div class="option"><input type="radio" name="q1" value="a"> 10–15 MHz</div>
+<div class="option"><input type="radio" name="q1" value="b"> 2–5 MHz</div>
+<div class="option"><input type="radio" name="q1" value="c"> 20–25 MHz</div>
+<div class="option"><input type="radio" name="q1" value="d"> 7–10 MHz</div>
+
+<div id="hint1" class="hint-box">
+Lower frequency ultrasound penetrates deeper into abdomen.
+</div>
+
+<div class="explanation">
+Correct Answer: 2–5 MHz → Curvilinear probes with 2–5 MHz frequency are typically used for abdominal imaging.
+</div>
+
+
+
+</div>
+<center>
+<!-- Buttons -->
+<button type="button" id="submitBtn" class="submit-btn" onclick="checkAnswers()">Submit</button>
+
+
+<button type="submit" id="finishBtn" class="finish-btn">
+View Result
+</button>
+</center>
+
+</form>
+
+<script>
+
+/* Hint Toggle */
+function toggleHint(id, element){
+ let hint=document.getElementById(id);
+
+ if(hint.style.display==="block"){
+   hint.style.display="none";
+   element.innerHTML="Show hint ▼";
+ }else{
+   hint.style.display="block";
+   element.innerHTML="Hide hint ▲";
+ }
+}
+
+/* Submit → Show Answers + Lock + Show Result Button */
+function checkAnswers(){
+
+ let questions=document.querySelectorAll(".question");
+ let total=questions.length;
+ let correct=0;
+
+ questions.forEach(q=>{
+
+   let correctAns=q.getAttribute("data-correct");
+   let selected=q.querySelector("input:checked");
+   let explanation=q.querySelector(".explanation");
+
+   let radios=q.querySelectorAll("input");
+   radios.forEach(r=> r.disabled=true); // Lock answers
+
+   if(!selected) return;
+
+   let options=q.querySelectorAll(".option");
+
+   options.forEach(opt=>{
+     let radio=opt.querySelector("input");
+
+     if(radio.value===correctAns){
+       opt.classList.add("correct");
+     }
+
+     if(selected.value!==correctAns && radio.checked){
+       opt.classList.add("wrong");
+     }
+   });
+
+   if(selected.value===correctAns){
+     correct++;
+   }
+
+   explanation.style.display="block";
+
+ });
+
+ document.getElementById("scoreInput").value=correct;
+ document.getElementById("totalInput").value=total;
+
+ // Hide Submit
+ document.getElementById("submitBtn").style.display="none";
+
+ // Show View Result
+ document.getElementById("finishBtn").style.display="inline-block";
+}
+
+</script>
+
+</body>
+</html>

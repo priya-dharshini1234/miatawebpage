@@ -1,0 +1,357 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIATA</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="{% static 'myapp/css/styles.css' %}">
+</head>
+<body>
+
+<!-- =========================================== -->
+<!--                TOP NAVIGATION               -->
+<!-- =========================================== -->
+<header class="top-nav">
+    <div class="logo">
+        <img src="{% static 'myapp/images/miatalogo.png' %}" width="100" alt="MIATA Logo">
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+
+    <nav class="menu">
+        
+            
+        <a href="{% url 'study' %}">Study</a>   
+        <a href="{% url 'student_services' %}">Student Services</a>
+        <a href="{% url 'research' %}">Research & Innovation</a>
+        <a href="{% url 'faculties' %}">Our Faculties</a>
+        <a href="{% url 'about' %}">About</a>
+    </nav>
+
+    <div class="right-links">
+        <a href="{% url 'login' %}">Login</a>
+        <a href="#">🔍</a>
+        <div class="currency-selector">
+            <span id="currency-btn" onclick="toggleDropdown()" style="font-size: 28px; cursor:pointer;">🌍</span>
+            <img id="selected-flag" style="width:28px; height:20px; margin-left:6px; display:none;">
+        </div>
+
+        <ul id="countryDropdown" class="dropdown-list" style="display:none;">
+            <li onclick="changeCurrency('GBP','gb')">United Kingdom</li>
+            <li onclick="changeCurrency('INR','in')">India</li>
+            <li onclick="changeCurrency('USD','us')">United States</li>
+            <li onclick="changeCurrency('AUD','au')">Australia</li>
+            <li onclick="changeCurrency('CAD','ca')">Canada</li>
+        </ul>
+    </div>
+</header>
+
+<!-- MOBILE MENU PANEL -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="{% url 'study' %}">Study</a>
+    <a href="{% url 'student_services' %}">Student Services</a>
+    <a href="{% url 'research' %}">Research & Innovation</a>
+    <a href="{% url 'faculties' %}">Our Faculties</a>
+    <a href="{% url 'about' %}">About</a>
+    <hr>
+    <a href="{% url 'subjects' %}">Subject areas</a>
+    <a href="{% url 'courses' %}">Courses A-Z</a>
+    <a href="{% url 'apply' %}">How to apply</a>
+    <a href="{% url 'fees' %}">Fees & Funding</a>
+    <a href="{% url 'international' %}">International</a>
+    <a href="{% url 'experience' %}">Student experience</a>
+    <a href="{% url 'events' %}">Postgraduate events</a>
+    <a href="{% url 'offer_holders' %}">Offer holders</a>
+    <a href="{% url 'contact' %}">Contact us</a>
+</div>
+
+<!-- SUB NAVIGATION -->
+<nav class="sub-nav">
+    <a href="{% url 'subjects' %}">Subject areas</a>
+    <a href="{% url 'courses' %}">Courses A-Z</a>
+    <a href="{% url 'apply' %}">How to apply</a>
+    <a href="{% url 'fees' %}">Fees & Funding</a>
+    <a href="{% url 'experience' %}">Student experience</a>
+    <a href="{% url 'events' %}">Postgraduate events</a>
+    <a href="{% url 'offer_holders' %}">Offer holders</a>
+    <a href="{% url 'contact' %}">Contact us</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+    <h1 class="shine">Professional diploma in Medical Imaging(Ultrasound)</h1>
+
+    <div class="slider-container">
+        <div class="slider-track">
+            <img src="{% static 'myapp/images/med1.jpg' %}" alt="Medical image">
+            <img src="{% static 'myapp/images/med2.jpg' %}" alt="Medical image">
+            <img src="{% static 'myapp/images/med3.jpg' %}" alt="Medical image">
+            <img src="{% static 'myapp/images/med4.jpeg' %}" alt="Medical image">
+            <img src="{% static 'myapp/images/med5.jpg' %}" alt="Medical image">
+            <img src="{% static 'myapp/images/med6.jpeg' %}" alt="Medical image">
+            <img src="{% static 'myapp/images/med7.jpg' %}" alt="Medical image">
+            <img src="{% static 'myapp/images/med8.jpg' %}" alt="Medical image">
+        </div>
+    </div>
+    <hr>
+
+    <!-- TAB BUTTONS -->
+    <div class="tabs">
+        <a href="#" class="tab-btn active" data-tab="overview">Overview</a>
+        <a href="#" class="tab-btn" data-tab="teaching">Teaching & Modules</a>
+        <a href="#" class="tab-btn" data-tab="entry">Entry requirements</a>
+        <a href="#" class="tab-btn" data-tab="fees">Fees</a>
+        <a href="#" class="tab-btn" data-tab="careers">Careers</a>
+    </div>
+</main>
+
+<!-- OVERVIEW TAB -->
+<section id="overview" class="tab-content active">
+    <div class="overview-section">
+        <div class="overview-left">
+            <div class="video-box">
+                <video width="100%" controls>
+                    <source src="{% static 'myapp/video/video.mp4' %}" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="overview-text">
+                <p>The Postgraduate Diploma in Medical Ultrasound is an advanced, competency-driven program designed to equip healthcare professionals with the theoretical knowledge, technical proficiency, and clinical judgment required for high-quality diagnostic sonography across diverse medical settings. Rooted in evidence-based practice and aligned with international regulatory standards, the course fosters autonomy, ethical responsibility, and interdisciplinary collaboration.</p>
+                <p>Through immersive modules in abdominal, obstetric, gynecological, vascular, musculoskeletal, and small parts imaging, learners gain mastery in image acquisition, interpretation, and reporting. The curriculum integrates anatomy, pathology, physics of ultrasound, and patient-centered care, with emphasis on clinical governance, safety protocols, and emerging technologies such as elastography and contrast-enhanced ultrasound.</p>
+                <p>Learners engage in supervised clinical placements, simulation labs, and case-based learning to develop real-world diagnostic acumen. The program also addresses professional development, communication skills, and medico-legal considerations, preparing graduates to lead in sonographer-led clinics, radiology departments, and wellness centers.</p>
+                <p>This diploma serves as a gateway to advanced roles in diagnostic imaging, research, and education, and is ideal for radiographers, physicians, and allied health professionals seeking specialization in ultrasound within compliant and innovative healthcare ecosystems.</p>
+            </div>
+        </div>
+
+        <!-- KEY INFO BOX -->
+        <aside class="key-info-box glass-card fade-up">
+            <h3>Key Information</h3>
+            <p><strong>Course type:</strong> Certificate</p>
+            <p><strong>Delivery mode:</strong> Blended (online lectures, in-person practicals, clinical placements)</p>
+            <p><strong>Study mode:</strong> Part time</p>
+            <p><strong>Duration:</strong> 15 months(full time), 18-24 months(part-time)</p>
+            <p><strong>Accreditation:</strong> Designed to meet CASE standards and AIUM/ACR international guidelines</p>
+            <p><strong>Application status:</strong> Closed</p>
+            <p><strong>Start date:</strong> September 2026</p>
+            <button class="register-btn">Register for mailing list</button>
+        </aside>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <h2 class="section-title">What Our Students Say</h2>
+        <div class="testimonial-container">
+            <div class="testimonial-card glass-card">
+                <img src="{% static 'myapp/images/aihuman.jpeg' %}" class="testimonial-img" alt="Student photo">
+                <p class="testimonial-text">“MIATA’s ultrasound program gave me strong clinical confidence and international exposure. The blended learning model was extremely effective.”</p>
+                <h4 class="student-name">— Sarah Johnson</h4>
+                <span class="student-role">Radiographer, UK</span>
+            </div>
+            <div class="testimonial-card glass-card">
+                <img src="{% static 'myapp/images/aiboy.jpeg' %}" class="testimonial-img" alt="Student photo">
+                <p class="testimonial-text">“Excellent faculty support and hands-on training. The clinical placement helped me transition smoothly into professional practice.”</p>
+                <h4 class="student-name">— Dr. Arjun Mehta</h4>
+                <span class="student-role">Medical Officer, India</span>
+            </div>
+            <div class="testimonial-card glass-card">
+                <img src="{% static 'myapp/images/aihumangirl.jpg' %}" class="testimonial-img" alt="Student photo">
+                <p class="testimonial-text">“MIATA maintains global standards in diagnostic imaging education. I highly recommend this program to healthcare professionals.”</p>
+                <h4 class="student-name">— Emily Wong</h4>
+                <span class="student-role">Sonographer, Australia</span>
+            </div>
+        </div>
+    </section>
+</section>
+
+<!-- TEACHING TAB -->
+<section id="teaching" class="tab-content">
+    <h2>Core Modules (Mandatory)</h2>
+    <table class="modules-table">
+        <thead>
+            <tr>
+                <th>Module Title</th>
+                <th>Credits</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Scientific Principles of Diagnostic Ultrasound</td>
+                <td>15</td>
+                <td>Covers physics, instrumentation, safety, and image optimization</td>
+            </tr>
+            <tr>
+                <td>Professional Ultrasound Practice</td>
+                <td>15</td>
+                <td>Legal, ethical, and professional frameworks; communication and patient care</td>
+            </tr>
+            <tr>
+                <td>Research Methods & Evidence-Based Practice</td>
+                <td>15</td>
+                <td>Prepares students for critical appraisal and research in ultrasound</td>
+            </tr>
+            <tr>
+                <td>Clinical Governance & Quality Assurance</td>
+                <td>15</td>
+                <td>Focuses on audit, peer review, and continuous improvement</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Clinical Modules (Choose 2–3) Mandatory</h2>
+    <table class="modules-table">
+        <thead>
+            <tr>
+                <th>Module Title</th>
+                <th>Credits</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>General Abdominal Ultrasound</td>
+                <td>30</td>
+                <td>Liver, gallbladder, kidneys, pancreas, spleen</td>
+            </tr>
+            <tr>
+                <td>Obstetric Ultrasound</td>
+                <td>30</td>
+                <td>First to third trimester, fetal biometry, anomalies</td>
+            </tr>
+            <tr>
+                <td>Gynaecological Ultrasound</td>
+                <td>30</td>
+                <td>Uterus, ovaries, pelvic pathology</td>
+            </tr>
+            <tr>
+                <td>Musculoskeletal Ultrasound</td>
+                <td>30</td>
+                <td>Upper/lower limb joints, tendons, ligaments</td>
+            </tr>
+            <tr>
+                <td>Vascular Ultrasound</td>
+                <td>30</td>
+                <td>DVT, carotid, arterial/venous systems</td>
+            </tr>
+            <tr>
+                <td>Point-of-Care Ultrasound (PoCUS)</td>
+                <td>30</td>
+                <td>Emergency, critical care, trauma, guided procedures</td>
+            </tr>
+            <tr>
+                <td>Non-medical Radiology</td>
+                <td>15</td>
+                <td>Gender revealing and bonding scans</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ENTRY TAB -->
+<section id="entry" class="tab-content">
+    <div class="programme-section">
+        <h2>Programme Requirements</h2>
+
+        <div class="req-block">
+            <h3>Clinical Placement Requirements</h3>
+            <ul>
+                <li>Minimum 2 days/week supervised clinical training</li>
+                <li>Logbook of minimum 250–300 scans per specialty</li>
+                <li>Formative and summative clinical assessments</li>
+            </ul>
+        </div>
+
+        <div class="req-block">
+            <h3>Assessment Methods</h3>
+            <ul>
+                <li>OSCEs (Objective Structured Clinical Examinations)</li>
+                <li>Case-based discussions</li>
+                <li>Reflective portfolio</li>
+                <li>Written assignments and presentations</li>
+                <li>Clinical competency evaluations</li>
+            </ul>
+        </div>
+
+        <div class="req-block">
+            <h3>Entry Requirements</h3>
+            <ul>
+                <li>Healthcare degree (e.g., radiography, nursing, medicine)</li>
+                <li>Confirmed clinical placement with mentor support</li>
+                <li>English proficiency (IELTS 6.5+ if applicable)</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- FEES TAB -->
+<section id="fees" class="tab-content">
+  <div class="fees-card">
+    <h2 class="fees-title">Program Fees</h2>
+    <table class="fees-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Details</th>
+          <th>Fee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2"><strong>Total Program Fee 💸</strong></td>
+          <td>Complete program (includes theory & practical)</td>
+          <td data-fee="18000" id="total-fee">£18,000</td>
+        </tr>
+        <tr>
+          <td>Applicable for students enrolling in UK or Australia-based training centers</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>Theory Component 📖</strong></td>
+          <td>Standard Fee</td>
+          <td data-fee="10000" id="theory-fee">£10,000</td>
+        </tr>
+        <tr>
+          <td>Delivered via MIATA’s dedicated online platform, accessible globally</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="3"><strong>Practical Training Component 🧪</strong></td>
+          <td>Malaysia</td>
+          <td data-fee="3000" id="malaysia-fee">£3,000</td>
+        </tr>
+        <tr>
+          <td>Cambodia</td>
+          <td data-fee="2000" id="cambodia-fee">£2,000</td>
+        </tr>
+        <tr>
+          <td>UK or Australia</td>
+          <td id="uk-fee">Included in full £18,000 package</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CAREERS TAB -->
+<section id="careers" class="tab-content">
+    <h2 class="section-title">Careers</h2>
+    <p>Career paths and opportunities will appear here.</p>
+</section>
+
+<!-- =========================================== -->
+<!--                TAB SCRIPT                   -->
+<!-- =========================================== -->
+<script src="{% static 'myapp/js/script.js' %}"></script>
+<script>
+function toggleMobileMenu() {
+  document.getElementById("mobileMenu").classList.toggle("show");
+}
+</script>
+
+</body>
+</html>
+

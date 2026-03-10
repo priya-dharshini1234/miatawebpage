@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Result</title>
+    <style>
+        body{
+            font-family: Arial;
+            background:#f4f6fb;
+            text-align:center;
+            padding:40px;
+        }
+
+        .card{
+            background:white;
+            width:400px;
+            margin:auto;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .percentage{
+            font-size:40px;
+            font-weight:bold;
+            margin:20px 0;
+        }
+
+        .pass{
+            color:green;
+        }
+
+        .fail{
+            color:red;
+        }
+
+        button{
+            padding:12px 20px;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            cursor:pointer;
+            margin:10px;
+        }
+
+        .next{
+            background:green;
+            color:white;
+        }
+
+        .retake{
+            background:red;
+            color:white;
+        }
+
+        .home{
+            background:#555;
+            color:white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Quiz Result</h2>
+
+    <div class="percentage {% if percentage >= 80 %}pass{% else %}fail{% endif %}">
+        {{ percentage }}%
+    </div>
+
+    {% if percentage >= 80 %}
+        <h3 style="color:green;">✅ Passed</h3>
+
+        <a href="/chap1/">
+            <button class="next">Go To Next Module</button>
+        </a>
+
+    {% else %}
+        <h3 style="color:red;">❌ Failed</h3>
+
+        <a href="/ass1/">
+            <button class="retake">Retake Quiz</button>
+        </a>
+
+        <a href="/chap1/">
+            <button class="home">Back To Home</button>
+        </a>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
